@@ -4,7 +4,6 @@ import "firebase/auth";
 import firebaseConfig from './firebase.config';
 import { UserContext } from '../../../App';
 import { useHistory, useLocation } from 'react-router-dom';
-import LoginBg from '../../../Images/like-electronics-blur.png';
 
 const Login = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -57,9 +56,6 @@ const Login = () => {
           <div className="from-group mt-5">
             <button className="btn btn-brand" onClick={handleGoogleSignIn}>Google Sign in</button>
           </div>
-        </div>
-        <div className="col-md-6 d-none d-md-block align-self-end">
-          <img className="img-fluid" src={LoginBg} alt="" />
         </div>
       </div>
     </div>

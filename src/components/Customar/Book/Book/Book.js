@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router';
 import { UserContext } from '../../../../App';
 import Sidebar from '../../../Shared/Sidebar/Sidebar';
 import ProcessPayment from '../ProcessPayment/ProcessPayment';
 import './Book.css';
 
 const Book = () => {
+    const {bookName}=useParams();
     const { register, handleSubmit, watch, errors } = useForm();
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [serviceName, setServiceName] = useContext(UserContext);
     const [bookingData, setBookingData] = useState(null);
-    console.log(serviceName);
     const onSubmit = data => {
         setBookingData(data);
     };
@@ -20,10 +21,10 @@ const Book = () => {
             name:bookingData.name,
             email:bookingData.email,
             address:bookingData.address,
-          paymentId,
-          orderTime: new Date() 
+            paymentId,
+            orderTime: new Date() 
         };
-        fetch('http://localhost:5000/addBook', {
+        fetch('https://aqueous-peak-27727.herokuapp.com/addBook', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -44,11 +45,14 @@ const Book = () => {
                 <div className="col-md-2 col-sm-6 col-12">
                     <Sidebar></Sidebar>
                 </div>
-                <h3>Book</h3>
-                <div style={{display: bookingData ? 'none': 'block'}} className="col-md-6 col-sm-12 col-12 d-flex justify-content-center">
+                <div className="col-md-6 col-sm-12 col-12 d-flex justify-content-center">
+                    <div>
+                        <h3>Book</h3>
+                    </div>
+                    <div style={{display: bookingData ? 'none': 'block'}} className="col-md-6 col-sm-12 col-12 d-flex justify-content-center">
                 <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
-                        <input type="text" ref={register({ required: true })} name="serviceName" placeholder="Service Name" className="form-control" />
+                        <input type="text" defaultValue={bookName}  ref={register({ required: true })} name="serviceName" placeholder="Service Name" className="form-control" />
                         {errors.serviceName && <span className="text-danger">This field is required</span>}
                     </div>
                     <div className="form-group">
@@ -70,6 +74,8 @@ const Book = () => {
                             <h2>Please Pay for this service</h2>
                             <ProcessPayment handlePayment={handlePaymentSuccess}></ProcessPayment>
                         </div>
+                </div>
+                
             </div>
         </section>
     );

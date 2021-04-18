@@ -5,12 +5,9 @@ import ServiceDetail from '../ServiceDetail/ServiceDetail';
 const Services = () => {
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/services`)
+        fetch(`https://aqueous-peak-27727.herokuapp.com/services`)
         .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setServices(data);
-        })
+        .then(data => setServices(data))
     }, [])
     return (
         <section className="services-container mt-5">

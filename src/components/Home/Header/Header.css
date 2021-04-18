@@ -1,7 +1,7 @@
 .header-container {
     height:800px;
     position:relative;
-    background-image: url('../../../Images/like-electronics.png');
+    background-image: url('../../../Images/banar2.jpg');
     background-size: cover;
 }
 .header-container::after {
@@ -11,6 +11,5 @@
     top: 0;
     width: 30%;
     right: 0;
-    background-color: #3A4256;
     z-index: -50;
 }

@@ -13,7 +13,7 @@ const AddService = () => {
             description:data.description,
             imageURL: imageURL
         };
-        const url = `http://localhost:5000/addService`;
+        const url = `https://aqueous-peak-27727.herokuapp.com/addService`;
         fetch(url, {
             method: 'POST',
             headers: {

@@ -1,17 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import banar from '../../../Images/banar.png';
 
 const HeaderMain = () => {
     return (
         <main style={{height:'600px'}} className="row d-flex align-items-center">
-            <div className="col-md-4 col-sm-6 col-12 offset-md-1">
-                <h1 style={{color: '#3A4256'}}>Your New Smile <br/> Starts Here</h1>
-                <p className="text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore eveniet necessitatibus et iusto corrupti minima.</p>
-                <Link to="/appointment" className="btn btn-brand">GET APPOINTMENT</Link>
-            </div>
-            <div className="col-md-6 col-sm-6 col-12">
-                <img src={banar} alt="" className="img-fluid"/>
+            <div className="col-md-6 col-sm-12 col-12 offset-md-1">
+                <h1 style={{color: '#3A4256'}}><b>Your New Smile <br/> Starts Here</b></h1>
+                <p className="text-primary"><b>Lorem ipsum, dolor sit amet consectetur adipisicing elit.<br/> Dolore eveniet necessitatibus et iusto corrupti minima.</b></p>
             </div>
         </main>
     );

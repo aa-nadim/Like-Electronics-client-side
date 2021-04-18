@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../../../App';
 import Sidebar from '../../../Shared/Sidebar/Sidebar';
 
 
 const BookingList = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [bookingLists, setBookingLists] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/bookingLists')
-        .then(res => res.json())
-        .then(data => setBookingLists(data))
+        fetch('https://aqueous-peak-27727.herokuapp.com/bookingLists', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json'},
+            body: JSON.stringify({ email: loggedInUser.email })
+        })
+        .then( res => res.json())
+        .then(data => {
+            console.log(data);
+            setBookingLists(data);
+        })
     }, [])
     return (
         <section>
