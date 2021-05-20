@@ -16,11 +16,13 @@ const Testimonials = () => {
                    <h5 className="text-primary text-uppercase">Testimonial</h5>
                    <h1>What Our Customer <br/> Says </h1>
                </div>
-               <div className="card-deck mt-5">
-                    {
-                        reviews.map(review => <Testimonial review={review} key={review.name}/>)
-                    }
-                </div>
+               <div className="d-flex justify-content-center">
+                    <div className="w-75 row mt-5 pt-5">
+                        {
+                            reviews.map(review => <Testimonial review={review} key={review.name}/>)
+                        }
+                    </div>
+                </div>    
            </div>
        </section>
     );

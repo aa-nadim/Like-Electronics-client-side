@@ -5,7 +5,7 @@ const ServiceDetail = (props) => {
     const {_id,serviceTitle,description,imageURL} = props.service;
     const bookName = serviceTitle;
     return (
-        <div className="col-md-4 text-center">
+        <div className="mt-3 mb-3 col-xl-4 text-center col-lg-6">
             <img style={{height: '300px',width:'350px'}} src={imageURL} alt="" />
             <h5 className="mt-3 mb-3">{serviceTitle}</h5>
             <p className="text-secondary">{description}</p>
