@@ -1,6 +1,8 @@
 # Like-Electronics-client-side
-
 A Servicing and Repairing website for Electronic products.
+
+## server == https://github.com/aa-nadim/Like-Electronics-server-side
+
 ## Features:
 
   • Users can buy a course with a payment system.
@@ -20,5 +22,4 @@ A Servicing and Repairing website for Electronic products.
   • React, Express, MongoDB, Firebase, Heroku. 
 
 ## Live Site: https://like-electronics.web.app/
-## Clint site code: https://github.com/aa-nadim/Like-Electronics-client-side
-## Server site code: https://github.com/aa-nadim/Like-Electronics-server-side
+
