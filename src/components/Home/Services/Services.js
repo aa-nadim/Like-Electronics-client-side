@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
-
 const Services = () => {
     const [services, setServices] = useState([]);
     useEffect(() => {
@@ -10,7 +9,7 @@ const Services = () => {
         .then(data => setServices(data))
     }, [])
     return (
-        <section style={{backgroundColor:'#8FBC8F'}} className="services-container mt-5">
+        <section  className="services-container mt-5">
             <div className="text-center">
                 <h3 style={{color: 'green'}}><strong>OUR SERVICES</strong></h3>
                 <h2>Services We Provide</h2>
