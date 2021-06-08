@@ -1,65 +1,56 @@
-import './App.css';
-import React, { createContext, useState } from 'react';
+import axios from "axios";
+import { createContext, lazy, Suspense, useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
+  Route,
+  Switch
 } from "react-router-dom";
-import Home from './components/Home/Home/Home';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Book from './components/Customar/Book/Book/Book';
-import Review from './components/Customar/Review/Review';
-
-import AddService from './components/Admin/AddService/AddService';
-import MakeAdmin from './components/Admin/MakeAdmin/MakeAdmin';
-import OrderList from './components/Admin/OrderList/OrderList';
-import ManageServices from './components/Admin/ManageServices/ManageServices';
-import Login from './components/Login/Login/Login';
-import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
-import BookingList from './components/Customar/BookingList/BookingList/BookingList';
-
+import './App.css';
+import LoadingSpinner from "./components/Home/LoadingSpinner/LoadingSpinner";
+import { getDecodedUser } from "./components/Login/LoginManager";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+const Home = lazy(() => import('./pages/Home'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Login = lazy(() => import('./pages/Login'));
 
 export const UserContext = createContext();
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState(getDecodedUser());
+  const [selectedService, setSelectedService] = useState([]);
+  const [adminLoading, setAdminLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    axios.get(`https://pacific-chamber-36634.herokuapp.com/isAdmin?email=${loggedInUser?.email}`)
+      .then(res => {
+        setIsAdmin(res.data);
+        setAdminLoading(false);
+      })
+      .catch(error => toast.error(error.message))
+  }, [loggedInUser?.email]);
+
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    <UserContext.Provider value={{ loggedInUser, setLoggedInUser, isAdmin, selectedService, setSelectedService }}>
       <Router>
-        <Switch>
-        <PrivateRoute path="/book/:bookName">
-            <Book></Book>
-        </PrivateRoute>
-        <PrivateRoute path="/bookingList">
-            <BookingList></BookingList>
-        </PrivateRoute>
-        <PrivateRoute path="/review">
-            <Review></Review>
-        </PrivateRoute>
-
-        <PrivateRoute path="/orderList">
-            <OrderList></OrderList>
-        </PrivateRoute>
-        <PrivateRoute path="/addService">
-            <AddService></AddService>
-        </PrivateRoute>
-        <PrivateRoute path="/makeAdmin">
-            <MakeAdmin></MakeAdmin>
-        </PrivateRoute>
-        <PrivateRoute path="/manageServices">
-            <ManageServices></ManageServices>
-        </PrivateRoute>
-
-        <Route path="/login">
-              <Login></Login>
-        </Route>
-        <Route exact path="/">
-            <Home></Home>
-          </Route>
-        </Switch>
+        <Toaster />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <PrivateRoute path="/dashboard/:panel">
+              <Dashboard adminLoading={adminLoading} />
+            </PrivateRoute>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     </UserContext.Provider>
   );
 }
 
-export default App; 
+export default App;

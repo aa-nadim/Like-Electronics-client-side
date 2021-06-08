@@ -1,16 +1,14 @@
 import React from 'react';
-import NavBar from '../../Shared/Navbar/Navbar';
-import BusinessInfo from '../BusinessInfo/BusinessInfo';
-import HeaderMain from '../HeaderMain/HeaderMain';
+import Banner from '../Banner/Banner';
+import NavBar from '../NavBar/NavBar';
 import './Header.css';
 
 const Header = () => {
     return (
-        <div className="header-container">
-            <NavBar></NavBar>
-            <HeaderMain></HeaderMain>
-            <BusinessInfo></BusinessInfo>
-        </div>
+        <section className="header-container">
+            <NavBar />
+            <Banner/>
+        </section>
     );
 };
 

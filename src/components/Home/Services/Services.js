@@ -1,26 +1,33 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Row, Spinner } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
+import './Services.css';
+
 const Services = () => {
+    const [loading, setLoading] = useState(true);
     const [services, setServices] = useState([]);
+
     useEffect(() => {
-        fetch(`https://aqueous-peak-27727.herokuapp.com/services`)
-        .then(res => res.json())
-        .then(data => setServices(data))
+        axios.get('https://pacific-chamber-36634.herokuapp.com/services')
+            .then(res => {
+                setServices(res.data);
+                setLoading(false);
+            })
+            .catch(error => toast.error(error.message))
     }, [])
+
     return (
-        <section  className="services-container mt-5">
-            <div className="text-center">
-                <h3 style={{color: 'green'}}><strong>OUR SERVICES</strong></h3>
-                <h2>Services We Provide</h2>
-            </div>
-            <div className="d-flex justify-content-center">
-                <div className="w-75 row mt-5 pt-5">
-                    {
-                        services.map(service => <ServiceDetail service={service} key={service.name}></ServiceDetail>)
-                    }
-                </div>
-            </div>
+        <section id="services" className="text-center py-5">
+            <h5>What We Do</h5>
+            <h1>Services We Provide</h1>
+            <Row className="justify-content-center mx-auto mt-md-5 pt-5">
+                {
+                    loading ? <Spinner animation="border" variant="danger" /> :
+                        services.map(service => <ServiceDetail key={service._id} service={service} />)
+                }
+            </Row>
         </section>
     );
 };
