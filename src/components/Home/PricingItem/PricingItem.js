@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Row, Tab } from 'react-bootstrap';
 import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
-import carImg from '../../../images/computer-img.jpg';
+import computer from '../../../images/computer-img.jpg';
 
 const PricingItem = ({ data: { title, price, description }, id }) => {
     return (
@@ -14,9 +14,9 @@ const PricingItem = ({ data: { title, price, description }, id }) => {
                             <div className={`pricing-text-${id + 1}`}>
                                 <span><small>$</small>{price}</span>
                                 <h4><Link to="/">{title}</Link></h4>
-                                <p>{description.slice(0, 94)}</p>
+                                <p>{description.slice(0, 50)}</p>
                             </div>
-                            <img src={carImg} alt="" />
+                            <img src={computer} alt="" />
                         </div>
                     </Fade>
                 </Col>

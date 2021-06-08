@@ -22,13 +22,14 @@ const Sidebar = ({ show, adminLoading }) => {
     return (
         <nav id="sidebar" className={show ? "active" : ""}>
             <div className="sidebar-header">
+                <Link to="/"> 
                 <img
                     alt="Logo"
                     src={Logo}
                     width="200"
                     height="160"
                     className="d-inline-block align-top"
-                />{' '}
+                /></Link>{' '}
             </div>
             {adminLoading ? <SidebarLoader /> :
                 <ul className="list-unstyled components">
@@ -79,13 +80,7 @@ const Sidebar = ({ show, adminLoading }) => {
                             </>
                         }
                 </ul>}
-            <ul className="list-unstyled CTAs">
-                <li>
-                    <Link to="/" className="back-home btn-main text-white">
-                        <FontAwesomeIcon icon={faSignOutAlt} /> Back to Home
-                    </Link>
-                </li>
-            </ul>
+            
         </nav>
     );
 };
